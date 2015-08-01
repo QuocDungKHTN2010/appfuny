@@ -20,6 +20,7 @@
         android:padding="10dp">
 
         <ScrollView
+            android:clickable="false"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="0dp">
@@ -31,36 +32,76 @@
 
 
                 <EditText
-                    android:id="@+id/editTextNameFit"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/editTextEventTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/event"
                     android:drawablePadding="4dp"
                     android:ems="15"
-                    android:hint="Name"
-                    android:inputType="textPersonName"></EditText>
+                    android:hint="Title"
+                    android:inputType="text"></EditText>
 
                 <EditText
+
+                    android:focusable="false"
+                    android:layout_marginTop="10dp"
                     android:drawablePadding="4dp"
-                    android:id="@+id/editTextFirstNameFit"
+                    android:id="@+id/editTextTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/time"
                     android:ems="15"
-                    android:hint="First name"
-                    android:inputType="textPersonName"></EditText>
+                    android:hint="Time"
+                    android:inputType="datetime"></EditText>
 
-                <EditText
-                    android:id="@+id/editTextBirthDayFit"
+                <TableRow android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:hint="Type"
-                    android:inputType="date"></EditText>
+                    android:layout_marginTop="10dp">
+
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:drawableStart="@drawable/meeting"
+                            android:text=""
+                            android:id="@+id/radioButtonMeeting"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/exam"
+                            android:text=""
+                            android:id="@+id/radioButtonExam"
+                            android:layout_weight="1" />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/good"
+                            android:text=""
+                            android:id="@+id/radioButtonGood"
+                            android:layout_weight="1" />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/bad"
+                            android:text=""
+                            android:id="@+id/radioButtonBad"
+                            android:layout_weight="1" />
+                    </RadioGroup>
+                </TableRow>
 
                 <EditText
+                    android:layout_marginTop="10dp"
                     android:drawablePadding="4dp"
-                    android:id="@+id/editTextZipCodeFit"
+                    android:id="@+id/editTextMessage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/message"
@@ -74,16 +115,32 @@
 
 
 
-                <EditText
-                    android:id="@+id/editTextCountryFit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <TableRow android:layout_width="match_parent"
 
-                    android:ems="15"
-                    android:hint="Country"
-                    android:inputType="text">
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/rowAdd"
+                    android:layout_height="wrap_content">
 
-                </EditText>
+                    <Button
+                        android:layout_marginLeft="10dp"
+                        android:padding="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/add"
+                        android:id="@+id/imageButtonAdd" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Add people"
+                        android:id="@+id/textView" />
+                </TableRow>
+
+
 
 
 
@@ -102,7 +159,10 @@
             android:layout_marginTop="10dp">
 
             <Button
-                android:id="@+id/login_btn_login"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="10dp"
+                android:id="@+id/buttonSendMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
