@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="app">
+<head>
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide {
+            display: none !important;
+        }
+    </style>
+    <title data-ng-bind="title"></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
+    <script>
+        // Must be first. IE10 mobile viewport fix
+        if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
+            var msViewportStyle = document.createElement("style");
+            var mq = "@-ms-viewport{width:auto!important}";
+            msViewportStyle.appendChild(document.createTextNode(mq));
+            document.getElementsByTagName("head")[0].appendChild(msViewportStyle);
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="content/ie-style.css" />
+    <link href="content/ie10mobile.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/font-awesome.min.css" rel="stylesheet" />
+    <link href="content/toastr.css" rel="stylesheet" />
+    <link href="content/toastr.css" rel="stylesheet" />
+    <link href="content/ui-grid-unstable.css" rel="stylesheet" />
+    <link href="content/angular-block-ui.css" rel="stylesheet" />
+    <link href="Content/select.min.css" rel="stylesheet" />
+    <link href="content/customtheme.css" rel="stylesheet">
+    <link href="content/style.css" rel="stylesheet" />
+    <link href="content/favicon.ico" rel="icon" />
+
+</head>
+<body>
+    <div ng-controller="AppController as model">
+        <header class="clearfix">
+            <cw-top-nav></cw-top-nav>
+        </header>
+        <section id="content" class="content">
+            <cw-side-bar></cw-side-bar>
+            <div ng-view class="mainbar"></div>
+        </section>
+    </div>
+    <div block-ui="shellBlockUI"></div>
+
+    <!-- Vendor Scripts -->
+    <script src="scripts/jquery-1.11.2.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="scripts/angular-sanitize.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular-ui/ui-utils.js"></script>
+    <script src="Scripts/angular-ui/select.min.js"></script>
+    <script src="scripts/toastr.js"></script>
+    <script src="scripts/angular-toastr.js"></script>
+    <script src="scripts/angular-block-ui.js"></script>
+    <script src="scripts/ui-grid-unstable.js"></script>
+    <script src="Scripts/angular-inview.js"></script>
+    <script src="scripts/i18n/angular-locale_da.js"></script>
+    <script src="scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/angular-touch.js"></script>
+    <script src="Scripts/lib/moment.js"></script>
+    <!-- Common -->
+    <script src="app/common/common.module.js"></script>
+    <script src="app/common/localStorage.js"></script>
+    <script src="app/common/currentUser.js"></script>
+    <script src="app/common/addToken.js"></script>
+    <script src="app/common/formEncode.js"></script>
+    <script src="app/common/logger/logger.js"></script>
+    <script src="app/common/logger/log.decorator.js"></script>
+    <script src="app/common/utils.js"></script>
+    <script src="app/common/appConfig.js"></script>
+    <script src="app/common/stringify.js"></script>
+    <script src="app/common/gridFeatures.js"></script>
+    <script src="app/common/loginRedirect.js"></script>
+
+
+    <!-- Layout -->
+    <script src="app/standard/layout/layout.module.js"></script>
+    <script src="app/standard/layout/layout.config.js"></script>
+    <script src="app/standard/layout/cwSideBar.js"></script>
+    <script src="app/standard/layout/cwTopNav.js"></script>
+
+    
+ 
+
+    
+
+
+
+    <!-- Account module -->
+    <script src="app/standard/account/account.module.js"></script>
+    <script src="app/standard/account/account.service.js"></script>
+    <script src="app/standard/account/login.js"></script>
+
+
+    <!-- Bootstrapping -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.config.js"></script>
+    <script src="app/app.route.js"></script>
+    <script src="app/app.js"></script>
+
+    <!-- Multi languages-->
+    <script src="scripts/angular-translate.min.js"></script>
+    <script src="scripts/angular-translate.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
+    <script src="scripts/angular-translate/storage-cookie.js"></script>
+    <script src="scripts/angular-translate/storage-key.js"></script>
+    <script src="scripts/angular-translate/storage-local.js"></script>
+    <script src="scripts/angular-translate/messageFormat.js"></script>
+    <script src="scripts/angular-translate/messageformat-interpolation.js"></script>
+    <script src="scripts/angular-translate/loader-partial.js"></script>
+    <script src="scripts/angular-translate/loader-static-files.js"></script>
+    <script src="scripts/angular-translate/loader-url.js"></script>
+
+</body>
+</html>

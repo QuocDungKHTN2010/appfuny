@@ -1,0 +1,37 @@
+﻿<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-header">
+        <a ng-click="home()" class="navbar-brand"><span class="brand-title">Case Worker</span></a>
+        <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+    </div>
+    <div class="navbar-collapse collapse">
+        <div class="pull-right navbar-logo">
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <a ng-show="!!user.username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{user.username}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a ng-click="logOut()"><i class="glyphicon glyphicon-log-out"></i>Log af</a></li>
+                    </ul>
+                </li>
+
+                <!--<li>
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{"Language"|translate}}
+                        <span class="caret"></span>
+                    </a>
+                    
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a ng-click="model.changeLanguage('en')"><i class="glyphicon glyphicon-random"></i>{{"English"|translate}}</a></li>
+                        <li><a ng-click="model.changeLanguage('da')"><i class="glyphicon glyphicon-random"></i>{{"Dannish"|translate}}</a></li>
+                    </ul>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,19 @@
+﻿@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+.ui-grid-pager-max-pages-number {
+    position: absolute;
+    top: 6px;
+    width: 20px;
+    left: 135px!important;
+}
+
+.ui-grid-pager-panel {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-bottom: -3px;
+}
+}
+

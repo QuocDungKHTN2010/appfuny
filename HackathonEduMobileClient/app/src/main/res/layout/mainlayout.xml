@@ -1,0 +1,222 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/fitinfo_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="50dp"
+        android:background="#99F1F2F4"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ScrollView
+            android:clickable="false"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <EditText
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/editTextEventTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/event"
+                    android:drawablePadding="4dp"
+                    android:ems="15"
+                    android:hint="Title"
+                    android:inputType="text"></EditText>
+
+                <EditText
+
+                    android:focusable="false"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="4dp"
+                    android:id="@+id/editTextTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/time"
+                    android:ems="15"
+                    android:hint="Time"
+                    android:inputType="datetime"></EditText>
+
+                <TableRow android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:drawableStart="@drawable/meeting"
+                            android:text=""
+                            android:id="@+id/radioButtonMeeting"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/exam"
+                            android:text=""
+                            android:id="@+id/radioButtonExam"
+                            android:layout_weight="1" />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/good"
+                            android:text=""
+                            android:id="@+id/radioButtonGood"
+                            android:layout_weight="1" />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/bad"
+                            android:text=""
+                            android:id="@+id/radioButtonBad"
+                            android:layout_weight="1" />
+                    </RadioGroup>
+                </TableRow>
+
+                <EditText
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="4dp"
+                    android:id="@+id/editTextMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/message"
+                    android:ems="15"
+                    android:lines="4"
+                    android:maxLines="4"
+                    android:minLines="4"
+                    android:scrollbars="vertical"
+                    android:hint="Message"
+                    android:inputType="textMultiLine"></EditText>
+
+
+
+                <TableRow android:layout_width="match_parent"
+
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/rowAdd"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:layout_marginLeft="10dp"
+                        android:padding="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/add"
+                        android:id="@+id/imageButtonAdd" />
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center|left"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Add people"
+                        android:id="@+id/textView" />
+                </TableRow>
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="10dp"
+                android:id="@+id/buttonSendMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SEND MESSAGE"
+                android:textStyle="bold" />
+        </TableRow>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/first"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView20"
+            android:layout_alignStart="@+id/textView20"
+            android:layout_below="@+id/textView20"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:lineSpacingExtra="10dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="20dp"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="2"
+            android:text="MyFit helps you live healthier by providing insights about your health and fitness based on your data from phones or wearables."
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+
+        <Button
+            android:id="@+id/buttonWelcomeFit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="20sp"
+            android:text="NEXT"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
