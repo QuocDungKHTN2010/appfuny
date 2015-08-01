@@ -1,0 +1,16 @@
+{
+	"text_Login": "Login",
+	"Username": "Username",
+	"Password": "Password",
+	"btn_Login": "Log in",
+	"Username_is_required": "Username is required",
+	"Password_is_required": "Password is required",
+	"Login_Please_complete_all_required_fields": "Please complete all required fields!",
+	"Login_Cannot_verify_your_login_info": "Cannot verify your login info",
+	"Logged_in_successfully": "Logged in successfully!",
+	"caseNumber": "Case Number",
+	"caseName": "Case Name",
+	"Hi": "Hello English!",
+	"createdOn": "Created On",
+	"modifiedOn": "Modified On"	
+}
