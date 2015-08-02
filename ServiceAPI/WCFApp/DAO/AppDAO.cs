@@ -53,7 +53,7 @@ namespace WCFApp.DAO
             for (int i = 0; i < listParents.Count; i++)
             {
                 string namePro1 = "insertHistory";
-                SqlParameter[] para = new SqlParameter[3];
+                SqlParameter[] para = new SqlParameter[4];
                 para[0] = new SqlParameter("@TeacherId", TeacherId);
                 para[1] = new SqlParameter("@MessageId", MessageId);
                 para[2] = new SqlParameter("@ParentId", listParents[i]);
@@ -236,6 +236,108 @@ namespace WCFApp.DAO
 
             }
             return listRes;
+        }
+
+        public List<Teacher> getAllTeacher()
+        {
+            List<Teacher> listTeacher = new List<Teacher>();
+            string strSql = "SELECT * FROM Teacher";
+            DataTable dt = DataProviderApp.executeQuery(strSql);
+            int n = dt.Rows.Count;
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    Teacher Cus = new Teacher();
+                    Cus.TeacherId = Convert.ToInt32(dt.Rows[i]["TeacherId"].ToString());
+                    Cus.Email = dt.Rows[i]["Email"].ToString();
+                    Cus.Username = dt.Rows[i]["Username"].ToString();
+                    Cus.Password = dt.Rows[i]["Password"].ToString();
+                    Cus.PhoneNumber = dt.Rows[i]["PhoneNumber"].ToString();
+                    Cus.FullName = dt.Rows[i]["FullName"].ToString();
+                    Cus.Status = dt.Rows[i]["Status"].ToString();
+                    Cus.CMND = dt.Rows[i]["CMND"].ToString();
+                    Cus.ImagePath = dt.Rows[i]["ImagePath"].ToString();
+                    Cus.Address = dt.Rows[i]["Address"].ToString();
+                    Cus.TypeId = Convert.ToInt32(dt.Rows[i]["TypeId"].ToString());
+                    listTeacher.Add(Cus);
+                }
+            }
+          
+            return listTeacher;
+        }
+
+        public List<Class> getAllClass()
+        {
+            List<Class> listTeacher = new List<Class>();
+            string strSql = "SELECT * FROM Class";
+            DataTable dt = DataProviderApp.executeQuery(strSql);
+            int n = dt.Rows.Count;
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    Class Cus = new Class();
+                    Cus.Id = Convert.ToInt32(dt.Rows[i]["Id"].ToString());
+                    Cus.Name = dt.Rows[i]["Name"].ToString();
+                    Cus.StatusClass = Convert.ToInt32(dt.Rows[i]["StatusClass"].ToString());
+                   
+                    listTeacher.Add(Cus);
+                }
+            }
+
+            return listTeacher;
+
+        }
+
+        public bool insertClassTeacherMapping(int teacherId,int studentId)
+        {
+            DataTable dt;
+            int n;
+
+            string namePro1 = "insertClassTeacherMapping";
+            SqlParameter[] para = new SqlParameter[2];
+            para[0] = new SqlParameter("@TeacherId", teacherId);
+            para[1] = new SqlParameter("@StudentId", studentId);
+
+            try
+            {
+                if (DataProviderApp.executeStoreProcedureNonQuery(namePro1, para) != 1)
+                    return false;
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool updateClassAndTeacher(int classId,int teacherId)
+        {
+            Teacher Cus = new Teacher();
+            string strSql = "SELECT * FROM Class_Student_Mapping Where ClassId=" + classId;
+            DataTable dt = DataProviderApp.executeQuery(strSql);
+            int n = dt.Rows.Count;
+            List<bool> listB = new List<bool>();
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    int tempId = Convert.ToInt32(dt.Rows[i]["StudentId"].ToString());
+                    if (insertClassTeacherMapping(teacherId, tempId))
+                        listB.Add(true);
+                    else
+                        listB.Add(false);
+                }
+                if (listB.Count == n)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

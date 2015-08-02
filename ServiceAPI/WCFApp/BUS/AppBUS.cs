@@ -30,5 +30,20 @@ namespace WCFApp.BUS
             return dao.getHistoryByTeacherId(TeacherId);
 
         }
+
+        public List<Teacher> getAllTeacher()
+        {
+            return dao.getAllTeacher();
+        }
+
+        public List<Class> getAllClass()
+        {
+            return dao.getAllClass();
+        }
+
+        public bool updateClassAndTeacher(int classId, int teacherId)
+        {
+            return dao.updateClassAndTeacher(classId, teacherId);
+        }
     }
 }

@@ -109,6 +109,8 @@
     <Compile Include="BUS\AppBUS.cs" />
     <Compile Include="DAO\AppDAO.cs" />
     <Compile Include="DataProviderApp.cs" />
+    <Compile Include="DTO\Class.cs" />
+    <Compile Include="DTO\Class_Student_Mapping.cs" />
     <Compile Include="DTO\History.cs" />
     <Compile Include="DTO\MessageContent.cs" />
     <Compile Include="DTO\Parent.cs" />

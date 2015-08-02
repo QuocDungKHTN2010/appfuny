@@ -34,6 +34,20 @@ namespace WCFApp
 
         }
 
+        public List<Teacher> getAllTeacher()
+        {
+            return cusproductBus.getAllTeacher();
+        }
+
+        public List<Class> getAllClass()
+        {
+            return cusproductBus.getAllClass();
+        }
+
+        public bool updateClassAndTeacher(int classId, int teacherId)
+        {
+            return cusproductBus.updateClassAndTeacher(classId, teacherId);
+        }
         public void test1()
         { }
         public void test2()
@@ -41,6 +55,12 @@ namespace WCFApp
         public void test3()
         { }
         public void test4()
+        { }
+        public void test5()
+        { }
+        public void test6()
+        { }
+        public void test7()
         { }
 
     }

@@ -25,6 +25,16 @@ namespace WCFApp
 
         [OperationContract]
         List<History> getHistoryByTeacherId(int TeacherId);
+
+        [OperationContract]
+        List<Teacher> getAllTeacher();
+
+        [OperationContract]
+        List<Class> getAllClass();
+
+        [OperationContract]
+        bool updateClassAndTeacher(int classId, int teacherId);
+
         // TODO: Add your service operations here
         [OperationContract]
         void test1();
@@ -34,6 +44,12 @@ namespace WCFApp
         void test3();
         [OperationContract]
         void test4();
+        [OperationContract]
+        void test5();
+        [OperationContract]
+        void test6();
+        [OperationContract]
+        void test7();
     }
 
 
