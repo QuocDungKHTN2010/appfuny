@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.herosky.hackathon.hackathonedumobileclient.ws.PBGTeacher_Student_Mapping;
+
 import java.util.ArrayList;
 
 /**
@@ -25,9 +27,9 @@ import java.util.ArrayList;
 public class AdapterGridView extends BaseAdapter {
 
     Context mContext;
-    ArrayList<MainActivity.Person> persons = new ArrayList<MainActivity.Person>();
+    ArrayList<PBGTeacher_Student_Mapping> persons = new ArrayList<PBGTeacher_Student_Mapping>();
 
-    public AdapterGridView(Context context, ArrayList<MainActivity.Person> lists) {
+    public AdapterGridView(Context context, ArrayList<PBGTeacher_Student_Mapping> lists) {
         mContext = context;
         persons = lists;
     }
@@ -64,7 +66,7 @@ public class AdapterGridView extends BaseAdapter {
         }
 
         holder.checkBox.setChecked(persons.get(position).isCheck);
-        holder.checkBox.setText(persons.get(position).name);
+        holder.checkBox.setText(persons.get(position).student.FullName);
         holder.checkBox.setTag(position);
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
