@@ -15,6 +15,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -45,20 +47,26 @@ public class MainActivity extends Activity{
             name = n;
         }
     }
-    LinearLayout loginForm, sendMessageForm;
+    RadioButton meeting, exam, comment, fee;
+    String type="";
+    LinearLayout loginForm, sendMessageForm,historyForm;
     TableRow rowAdd;
     EditText title, message, time,user,pass;
     TextView people;
     Button addPeople,sendMessage,login;
 
-
-    public void initID()
+    public void initIDLoginForm()
     {
         loginForm = (LinearLayout)findViewById(R.id.first);
-        sendMessageForm = (LinearLayout)findViewById(R.id.sendMessageForm);
+
         user = (EditText) findViewById(R.id.editTextUserName);
         pass = (EditText) findViewById(R.id.editTextPass);
+        login = (Button) findViewById(R.id.buttonLogin);
+    }
 
+    public void initIDSendMessageForm()
+    {
+        sendMessageForm = (LinearLayout)findViewById(R.id.sendMessageForm);
         title = (EditText) findViewById(R.id.editTextEventTitle);
         message = (EditText) findViewById(R.id.editTextMessage);
         time = (EditText) findViewById(R.id.editTextTime);
@@ -66,7 +74,12 @@ public class MainActivity extends Activity{
         addPeople = (Button) findViewById(R.id.imageButtonAdd);
         sendMessage = (Button) findViewById(R.id.buttonSendMessage);
         rowAdd = (TableRow) findViewById(R.id.rowAdd);
-        login = (Button) findViewById(R.id.buttonLogin);
+    }
+    public void initID()
+    {
+        initIDHistoryForm();
+        initIDLoginForm();
+        initIDSendMessageForm();
     }
     ProgressDialog dialog;
     public void initData()
@@ -205,7 +218,7 @@ public class MainActivity extends Activity{
         }
     }
     boolean isSendAll = false;
-    ArrayList<PBGTeacher_Student_Mapping>  hlistChecked = new ArrayList<>();
+    ArrayList<PBGTeacher_Student_Mapping> listChecked = new ArrayList<>();
     public class sendMessageAsync extends AsyncTask<Void, Void, PBGArrayOfstring>
     {
         @Override
@@ -239,7 +252,7 @@ public class MainActivity extends Activity{
                 Integer isAll;
                 if(isSendAll)
                     isAll =1;
-                else isAll = 0;
+                else isAll = 2;
                 return new ServiceClient().sendMessage(currentUser.TeacherId+"" ,message.getText().toString(), phonesPBG,idPBG, "",isAll, new Date(), currentTime.getTime());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -284,20 +297,92 @@ public class MainActivity extends Activity{
     }
     Calendar currentTime;
     boolean checkAll = false;
-    public void setUp()
+
+    public void setUpHistoryForm()
     {
-        currentTime = Calendar.getInstance();
-        initData();
-        login.setOnClickListener(new View.OnClickListener() {
+        rowFilter.setClickable(true);
+        rowFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validateForm()) {
-                    new loginSync().execute();
-                }
+
+                checkAll = true;
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.dialog_choose_people);
+                dialog.setTitle("FILTER STUDENT");
+                GridView gridView = (GridView) dialog.findViewById(R.id.gridView);
+                final AdapterGridView adapter = new AdapterGridView(MainActivity.this, listInfos);
+                gridView.setAdapter(adapter);
+                Button done = (Button)dialog.findViewById(R.id.buttonDone);
+                final Button selectAll = (Button)dialog.findViewById(R.id.buttonSelect);
+                selectAll.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        for(int i = 0; i< listInfos.size();i++)
+                        {
+                            listInfos.get(i).isCheck = checkAll;
+                        }
+                        checkAll = !checkAll;
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String preview = "";
+                        int count= 0;
+                        listChecked.clear();
+                        for(int i= 0; i < listInfos.size();i++)
+                        {
+                            if(listInfos.get(i).isCheck) {
+                                listChecked.add(listInfos.get(i));
+                                count++;
+                                if (preview.length() > 40) {
+                                    preview += "...";
+
+                                }
+                                else {
+
+                                    preview += listInfos.get(i).student.FullName + ", ";
+                                }
+                            }
+
+                        }
+
+                        if(count == 0)
+                            preview = "No student choose";
+                        else {
+                            if (count == listInfos.size()) {
+                                preview = "All student";
+                                isSendAll = true;
+                            } else
+                                isSendAll = false;
+                        }
+                        people.setText(preview);
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
 
             }
         });
 
+    }
+
+    Button addHistory, deleteHistory;
+    ListView listViewHistory;
+    TableRow rowFilter;
+    public void initIDHistoryForm()
+    {
+        historyForm = (LinearLayout)findViewById(R.id.historyForm);
+        addHistory = (Button)findViewById(R.id.buttonAdd);
+        deleteHistory = (Button)findViewById(R.id.buttonDel);
+        listViewHistory = (ListView)findViewById(R.id.listViewHistory);
+        rowFilter = (TableRow) findViewById(R.id.rowFilter);
+    }
+    public void setUpSendMessageForm()
+    {
+        currentTime = Calendar.getInstance();
+        //initData();
         rowAdd.setClickable(true);
         rowAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -415,6 +500,25 @@ public class MainActivity extends Activity{
                 new sendMessageAsync().execute();
             }
         });
+    }
+
+    public void setUpFormLogin()
+    {
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validateForm()) {
+                    new loginSync().execute();
+                }
+
+            }
+        });
+    }
+    public void setUp()
+    {
+        setUpFormLogin();
+        setUpSendMessageForm();
+        setUpHistoryForm();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
