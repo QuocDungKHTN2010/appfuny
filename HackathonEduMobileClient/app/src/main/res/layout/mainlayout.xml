@@ -2,19 +2,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/education2"
     android:gravity="center"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo2"
+        android:id="@+id/imageView" />
+
+    <TextView
+        android:padding="10dp"
+        android:textStyle="bold"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="EduConnect"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal" />
+
     <LinearLayout
-        android:visibility="visible"
-        android:id="@+id/fitinfo_form"
+        android:visibility="gone"
+        android:id="@+id/sendMessageForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="50dp"
+
         android:background="#99F1F2F4"
         android:orientation="vertical"
         android:padding="10dp">
@@ -70,7 +92,7 @@
                             android:layout_height="wrap_content"
 
                             android:drawableStart="@drawable/meeting"
-                            android:text=""
+                            android:text="Meeting"
                             android:id="@+id/radioButtonMeeting"
                             android:layout_weight="1" />
 
@@ -78,27 +100,30 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/exam"
-                            android:text=""
+                            android:text="Exam"
                             android:id="@+id/radioButtonExam"
                             android:layout_weight="1" />
                         <RadioButton
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/good"
-                            android:text=""
+                            android:text="Good"
                             android:id="@+id/radioButtonGood"
                             android:layout_weight="1" />
                         <RadioButton
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:drawableStart="@drawable/bad"
-                            android:text=""
+                            android:text="Bad"
                             android:id="@+id/radioButtonBad"
                             android:layout_weight="1" />
                     </RadioGroup>
                 </TableRow>
 
                 <EditText
+                    android:textCursorDrawable="@null"
+                    android:paddingLeft="10dp"
+                    android:background="#33FFFFFF"
                     android:layout_marginTop="10dp"
                     android:drawablePadding="4dp"
                     android:id="@+id/editTextMessage"
@@ -125,8 +150,8 @@
                         android:layout_marginLeft="10dp"
                         android:padding="10dp"
                         android:layout_marginRight="5dp"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/add"
                         android:id="@+id/imageButtonAdd" />
 
@@ -139,14 +164,6 @@
                         android:text="Add people"
                         android:id="@+id/textView" />
                 </TableRow>
-
-
-
-
-
-
-
-
 
             </LinearLayout>
         </ScrollView>
@@ -164,6 +181,7 @@
                 android:layout_marginTop="10dp"
                 android:id="@+id/buttonSendMessage"
                 android:layout_width="0dp"
+                android:padding="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="SEND MESSAGE"
@@ -174,11 +192,12 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/first"
-        android:visibility="gone"
+        android:visibility="visible"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
 
             android:id="@+id/textView24"
@@ -197,14 +216,44 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="2"
-            android:text="MyFit helps you live healthier by providing insights about your health and fitness based on your data from phones or wearables."
+            android:text="Improve connect between family and school.safsdfsdfsdafdsf sdfsfsdsaf sfdsdf."
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:visibility="visible" />
-
+        <LinearLayout
+            android:padding="10dp"
+            android:background="#99F1F2F4"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <requestFocus/>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/editTextUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/user"
+                android:drawablePadding="4dp"
+                android:ems="15"
+                android:hint="Username"
+                android:inputType="text"></EditText>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:id="@+id/editTextPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/pass"
+                android:drawablePadding="4dp"
+                android:ems="15"
+                android:hint="Password"
+                android:inputType="textPassword"></EditText>
+        </LinearLayout>
 
         <Button
-            android:id="@+id/buttonWelcomeFit"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/white"
+            android:id="@+id/buttonLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
@@ -216,6 +265,7 @@
 
 
     </LinearLayout>
+
 
 
 

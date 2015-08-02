@@ -16,16 +16,29 @@
         android:layout_marginTop="10dp"
         android:layout_above="@+id/buttonDone" />
 
-    <Button
+    <TableRow
+        android:gravity="center"
+        android:layout_height="wrap_content" android:layout_width="match_parent">
+        <Button
 
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_background"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:id="@+id/buttonDone" />
+        <Button
+                android:layout_marginLeft="5dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_background"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CHECK ALL"
+            android:id="@+id/buttonSelect" />
+    </TableRow>
 
-        android:textColor="@android:color/white"
-        android:background="@drawable/button_background"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DONE"
-        android:id="@+id/buttonDone" />
 
 
 

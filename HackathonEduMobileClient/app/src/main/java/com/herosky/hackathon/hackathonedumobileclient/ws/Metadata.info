@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<EasyWSDL>
+  <Info>
+    <Version>4.1.7.1</Version>
+    <AccountType>Basic</AccountType>
+    <LibrariesFolder>libs/easywsdl</LibrariesFolder>
+  </Info>
+  <Settings>
+    <Url>http://10.0.240.221:56481/ServiceApp.svc?wsdl</Url>
+    <ClassPrefix/>
+    <PackageName>com.herosky.hackathon.hackathonedumobileclient.ws</PackageName>
+    <AddDocumentation>false</AddDocumentation>
+    <EnableAdvancedFeatures>false</EnableAdvancedFeatures>
+    <EnableMTOM>false</EnableMTOM>
+    <EncodeIllegalCharacters>true</EncodeIllegalCharacters>
+    <GenerateAsyncOperations>false</GenerateAsyncOperations>
+    <ImplementSerializable>false</ImplementSerializable>
+    <InitializeCollections>true</InitializeCollections>
+    <UseJodaTime>false</UseJodaTime>
+  </Settings>
+  <Files>
+    <File>PBGArrayOfstring.java</File>
+    <File>PBGArrayOfTeacher_Student_Mapping.java</File>
+    <File>PBGBasicHttpBinding_IServiceApp.java</File>
+    <File>PBGExtendedSoapSerializationEnvelope.java</File>
+    <File>PBGHelper.java</File>
+    <File>PBGMarshalGuid.java</File>
+    <File>PBGParent.java</File>
+    <File>PBGStudent.java</File>
+    <File>PBGTeacher.java</File>
+    <File>PBGTeacher_Student_Mapping.java</File>
+  </Files>
+  <Libraries>
+    <File>ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar</File>
+  </Libraries>
+</EasyWSDL>
