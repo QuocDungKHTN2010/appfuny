@@ -37,7 +37,7 @@ public class ServiceClient
 
     String url="http://10.0.240.221:56481/ServiceApp.svc";
 
-    int timeOut=60000;
+    int timeOut=10000;
     public List< HeaderProperty> httpHeaders;
     public boolean enableLogging;
 

@@ -7,16 +7,21 @@ import android.app.TimePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -49,12 +54,104 @@ public class MainActivity extends Activity{
     }
     RadioButton meeting, exam, comment, fee;
     String type="";
+    RadioGroup group1,group2;
     LinearLayout loginForm, sendMessageForm,historyForm;
     TableRow rowAdd;
     EditText title, message, time,user,pass;
     TextView people;
     Button addPeople,sendMessage,login;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(currentForm.equals(loginForm))
+            return true;
+        switch (item.getItemId()) {
+            case R.id.call:
+
+                return true;
+            case R.id.historyAction:
+                goToHistoryForm();
+                return true;
+            case R.id.message:
+                goToMessageForm(true);
+                return true;
+            case R.id.logoutAction:
+                goToLoginForm();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public View currentForm;
+    Animation in, out;
+
+
+    public void goToMessageForm(boolean isSendMessage)
+    {
+        exam.setChecked(true);
+        group2.clearCheck();
+        group1.clearCheck();
+        if(isSendMessage)
+        {
+            group2.setVisibility(View.VISIBLE);
+        }
+        else
+            group2.setVisibility(View.GONE);
+
+        currentForm.startAnimation(out);
+        currentForm.setVisibility(View.GONE);
+        sendMessageForm.setVisibility(View.VISIBLE);
+        sendMessageForm.startAnimation(in);
+        currentForm = sendMessageForm;
+
+
+
+    }
+    Boolean isSendMessage = false;
+    public class loadHistoryTask extends  AsyncTask<Void, Void, Boolean>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+        }
+    }
+    public void goToHistoryForm()
+    {
+        isSendMessage = false;
+        currentForm.startAnimation(out);
+        currentForm.setVisibility(View.GONE);
+        historyForm.setVisibility(View.VISIBLE);
+        historyForm.startAnimation(in);
+        currentForm = historyForm;
+    }
+    public void goToLoginForm()
+    {
+        currentUser = null;
+        currentForm.startAnimation(out);
+        currentForm.setVisibility(View.GONE);
+        loginForm.setVisibility(View.VISIBLE);
+        loginForm.startAnimation(in);
+        currentForm = loginForm;
+    }
     public void initIDLoginForm()
     {
         loginForm = (LinearLayout)findViewById(R.id.first);
@@ -66,6 +163,9 @@ public class MainActivity extends Activity{
 
     public void initIDSendMessageForm()
     {
+
+        group1 = (RadioGroup)findViewById(R.id.group1);
+        group2 = (RadioGroup)findViewById(R.id.group2);
         sendMessageForm = (LinearLayout)findViewById(R.id.sendMessageForm);
         title = (EditText) findViewById(R.id.editTextEventTitle);
         message = (EditText) findViewById(R.id.editTextMessage);
@@ -74,6 +174,11 @@ public class MainActivity extends Activity{
         addPeople = (Button) findViewById(R.id.imageButtonAdd);
         sendMessage = (Button) findViewById(R.id.buttonSendMessage);
         rowAdd = (TableRow) findViewById(R.id.rowAdd);
+
+        exam = (RadioButton)findViewById(R.id.radioButtonExam);
+        fee = (RadioButton)findViewById(R.id.radioButtonFee);
+        comment = (RadioButton)findViewById(R.id.radioButtonComment);
+        meeting = (RadioButton)findViewById(R.id.radioButtonMeeting);
     }
     public void initID()
     {
@@ -185,14 +290,9 @@ public class MainActivity extends Activity{
             }
             else
             {
+                listInfos.clear();
                 listInfos.addAll(result);
-                Animation in = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_right);
-                Animation out = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_left);
-
-                loginForm.startAnimation(out);
-                loginForm.setVisibility(View.GONE);
-                sendMessageForm.setVisibility(View.VISIBLE);
-                sendMessageForm.startAnimation(in);
+                goToMessageForm(true);
             }
             dialog.dismiss();
             super.onPostExecute(result);
@@ -253,7 +353,7 @@ public class MainActivity extends Activity{
                 if(isSendAll)
                     isAll =1;
                 else isAll = 2;
-                return new ServiceClient().sendMessage(currentUser.TeacherId+"" ,message.getText().toString(), phonesPBG,idPBG, "",isAll, new Date(), currentTime.getTime());
+                return new ServiceClient().sendMessage(currentUser.TeacherId+"" ,message.getText().toString(), phonesPBG,idPBG, type,isAll, new Date(), currentTime.getTime());
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -298,6 +398,8 @@ public class MainActivity extends Activity{
     Calendar currentTime;
     boolean checkAll = false;
 
+
+
     public void setUpHistoryForm()
     {
         rowFilter.setClickable(true);
@@ -312,13 +414,12 @@ public class MainActivity extends Activity{
                 GridView gridView = (GridView) dialog.findViewById(R.id.gridView);
                 final AdapterGridView adapter = new AdapterGridView(MainActivity.this, listInfos);
                 gridView.setAdapter(adapter);
-                Button done = (Button)dialog.findViewById(R.id.buttonDone);
-                final Button selectAll = (Button)dialog.findViewById(R.id.buttonSelect);
+                Button done = (Button) dialog.findViewById(R.id.buttonDone);
+                final Button selectAll = (Button) dialog.findViewById(R.id.buttonSelect);
                 selectAll.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        for(int i = 0; i< listInfos.size();i++)
-                        {
+                        for (int i = 0; i < listInfos.size(); i++) {
                             listInfos.get(i).isCheck = checkAll;
                         }
                         checkAll = !checkAll;
@@ -329,18 +430,16 @@ public class MainActivity extends Activity{
                     @Override
                     public void onClick(View v) {
                         String preview = "";
-                        int count= 0;
+                        int count = 0;
                         listChecked.clear();
-                        for(int i= 0; i < listInfos.size();i++)
-                        {
-                            if(listInfos.get(i).isCheck) {
+                        for (int i = 0; i < listInfos.size(); i++) {
+                            if (listInfos.get(i).isCheck) {
                                 listChecked.add(listInfos.get(i));
                                 count++;
                                 if (preview.length() > 40) {
                                     preview += "...";
 
-                                }
-                                else {
+                                } else {
 
                                     preview += listInfos.get(i).student.FullName + ", ";
                                 }
@@ -348,7 +447,7 @@ public class MainActivity extends Activity{
 
                         }
 
-                        if(count == 0)
+                        if (count == 0)
                             preview = "No student choose";
                         else {
                             if (count == listInfos.size()) {
@@ -363,6 +462,13 @@ public class MainActivity extends Activity{
                 });
                 dialog.show();
 
+            }
+        });
+
+        addHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMessageForm(false);
             }
         });
 
@@ -383,6 +489,56 @@ public class MainActivity extends Activity{
     {
         currentTime = Calendar.getInstance();
         //initData();
+        exam.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    type ="Exam";
+                    meeting.setChecked(false);
+                    comment.setChecked(false);
+                    fee.setChecked(false);
+                }
+            }
+        });
+        fee.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    type ="Fee";
+                    meeting.setChecked(false);
+                    comment.setChecked(false);
+                    exam.setChecked(false);
+                }
+            }
+        });
+        comment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    type ="Comment";
+                    meeting.setChecked(false);
+                    fee.setChecked(false);
+                    exam.setChecked(false);
+                }
+            }
+        });
+        meeting.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    type ="Meeting";
+                    exam.setChecked(false);
+                    comment.setChecked(false);
+                    fee.setChecked(false);
+                }
+            }
+        });
+        //
+        //
         rowAdd.setClickable(true);
         rowAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -525,6 +681,12 @@ public class MainActivity extends Activity{
         setContentView(R.layout.mainlayout);
         initID();
         setUp();
+        in = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_right);
+        out = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_left);
+        loginForm.setVisibility(View.GONE);
+        historyForm.setVisibility(View.GONE);
+        sendMessageForm.setVisibility(View.VISIBLE);
+        currentForm = sendMessageForm;
         super.onCreate(savedInstanceState);
     }
 }
