@@ -24,5 +24,11 @@ namespace WCFApp.BUS
         {
             return dao.getStudent_Parent_ByTeacherId(TeacherId);
         }
+
+        public List<History> getHistoryByTeacherId(int TeacherId)
+        {
+            return dao.getHistoryByTeacherId(TeacherId);
+
+        }
     }
 }

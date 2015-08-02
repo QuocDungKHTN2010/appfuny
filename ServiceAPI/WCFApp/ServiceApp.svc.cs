@@ -28,5 +28,20 @@ namespace WCFApp
         {
             return cusproductBus.getStudent_Parent_ByTeacherId(TeacherId);
         }
+        public List<History> getHistoryByTeacherId(int TeacherId)
+        {
+            return cusproductBus.getHistoryByTeacherId(TeacherId);
+
+        }
+
+        public void test1()
+        { }
+        public void test2()
+        { }
+        public void test3()
+        { }
+        public void test4()
+        { }
+
     }
 }

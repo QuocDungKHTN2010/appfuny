@@ -22,7 +22,18 @@ namespace WCFApp
 
         [OperationContract]
         List<Teacher_Student_Mapping> getStudent_Parent_ByTeacherId(int TeacherId);
+
+        [OperationContract]
+        List<History> getHistoryByTeacherId(int TeacherId);
         // TODO: Add your service operations here
+        [OperationContract]
+        void test1();
+        [OperationContract]
+        void test2();
+        [OperationContract]
+        void test3();
+        [OperationContract]
+        void test4();
     }
 
 

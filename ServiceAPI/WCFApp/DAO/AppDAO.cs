@@ -41,13 +41,13 @@ namespace WCFApp.DAO
             //save Message For Parent
             if(r!=-1)
             {
-                insertHistory(TeacherId, r, listParents);
+                insertHistory(TeacherId, r, listParents,listRes);
             }
             return listRes;
         }
 
         //save message for parents
-        public List<bool> insertHistory(string TeacherId,int MessageId,List<string> listParents)
+        public List<bool> insertHistory(string TeacherId,int MessageId,List<string> listParents,List<string> listSendMess)
         {
             List<bool> listRe = new List<bool>();
             for (int i = 0; i < listParents.Count; i++)
@@ -57,6 +57,10 @@ namespace WCFApp.DAO
                 para[0] = new SqlParameter("@TeacherId", TeacherId);
                 para[1] = new SqlParameter("@MessageId", MessageId);
                 para[2] = new SqlParameter("@ParentId", listParents[i]);
+                if(!listSendMess[i].Equals("success"))
+                    para[3] = new SqlParameter("@StatusMessage", 2);
+                else
+                    para[3] = new SqlParameter("@StatusMessage", 1);
 
                 try
                 {
@@ -79,6 +83,8 @@ namespace WCFApp.DAO
         //save history
         public int insertContentMessage(string Content, string StatusPriority,int TypeMessageId,DateTime TimeSend,DateTime TimeNeed)
         {
+            DataTable dt;
+            int n;
 
             string namePro1 = "sp_InsertContentMessage";
             SqlParameter[] para = new SqlParameter[5];
@@ -90,9 +96,13 @@ namespace WCFApp.DAO
 
             try
             {
-                int res = DataProviderApp.executeStoreProcedureNonQuery1(namePro1, para);
-
-                return res;
+                dt = DataProviderApp.executeStoreProcedureQuery(namePro1, para);
+                n = dt.Rows.Count;
+                if (n > 0)
+                {
+                    return Convert.ToInt32(dt.Rows[0]["ReturnValue"].ToString());
+                }
+                return -1;
             }
             catch (Exception ex)
             {
@@ -167,6 +177,58 @@ namespace WCFApp.DAO
                     temp.parent.PhoneNumber = dt.Rows[i]["PhoneNumber"].ToString();
                     temp.parent.Status = dt.Rows[i]["Status"].ToString();
 
+
+                    listRes.Add(temp);
+
+                }
+
+            }
+            return listRes;
+        }
+
+        public List<History> getHistoryByTeacherId(int TeacherId)
+        {
+
+            List<History> listRes = new List<History>();
+            DataTable dt;
+            int n;
+
+            string nameProc = "getHistoryByTeacherId";
+            SqlParameter[] para = new SqlParameter[1];
+            para[0] = new SqlParameter("@TeacherId", TeacherId);
+
+
+            dt = DataProviderApp.executeStoreProcedureQuery(nameProc, para);
+            n = dt.Rows.Count;
+            if (n > 0)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    History temp = new History();
+                    temp.StatusMessage = Convert.ToInt32(dt.Rows[i]["StatusMessage"].ToString());
+                    temp.TeacherId = TeacherId;
+                    temp.MessageId= Convert.ToInt32(dt.Rows[i]["MessageId"].ToString());
+                    temp.ParentId= Convert.ToInt32(dt.Rows[i]["ParentId"].ToString());
+
+                    temp.messageContent = new MessageContent();
+                    temp.messageContent.Content = dt.Rows[i]["Content"].ToString();
+                    temp.messageContent.Id= Convert.ToInt32(dt.Rows[i]["Id"].ToString());
+                    temp.messageContent.StatusPriority = dt.Rows[i]["StatusPriority"].ToString();
+                    temp.messageContent.TypeMessageId = Convert.ToInt32(dt.Rows[i]["TypeMessageId"].ToString());
+                    temp.messageContent.TimeNeed = Convert.ToDateTime(dt.Rows[i]["TimeNeed"].ToString());
+                    temp.messageContent.TimeSend = Convert.ToDateTime(dt.Rows[i]["TimeSend"].ToString());
+                    temp.messageContent.typeM = new TypeMessage();
+                    temp.messageContent.typeM.DescriptionTypeMessage = dt.Rows[i]["DescriptionTypeMessage"].ToString();
+
+                    temp.parent = new Parent();
+                    temp.parent.StudentId = Convert.ToInt32(dt.Rows[i]["StudentId"].ToString());
+                    temp.parent.Address = dt.Rows[i]["Address"].ToString();
+                    temp.parent.CMND = dt.Rows[i]["CMND"].ToString();
+                    temp.parent.Email = dt.Rows[i]["Email"].ToString();
+                    temp.parent.FullName = dt.Rows[i]["FullName"].ToString();
+                    temp.parent.ParentId = Convert.ToInt32(dt.Rows[i]["ParentId"].ToString());
+                    temp.parent.PhoneNumber = dt.Rows[i]["PhoneNumber"].ToString();
+                    temp.parent.Status = dt.Rows[i]["Status"].ToString();
 
                     listRes.Add(temp);
 

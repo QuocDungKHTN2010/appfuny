@@ -14,5 +14,7 @@ namespace WCFApp.DTO
         public DateTime TimeSend { get; set; }
         public DateTime TimeNeed { get; set; }
 
+        public TypeMessage typeM { get; set; }
+
     }
 }
