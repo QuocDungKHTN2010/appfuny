@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="#F1EFE2"
+    android:id="@+id/root"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/exam"
+        android:text=""
+        android:id="@+id/checkBoxHistory" />
+
+
+    <TextView
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Message"
+        android:id="@+id/textViewMessage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Receiver"
+        android:id="@+id/textViewReceive" />
+
+    <ImageView
+        android:padding="5dp"
+        android:src="@drawable/pending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewStatus" />
+
+
+</LinearLayout>
