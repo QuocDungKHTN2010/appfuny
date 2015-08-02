@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e651eff9-cc89-4afa-a0a9-c6d95aa1bc2e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:56481/ServiceApp.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceApp.xsd" MetadataType="Schema" ID="e85f8c3e-1232-42a4-b24f-31e97f901e3f" SourceId="1" SourceUrl="http://localhost:56481/ServiceApp.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceApp.wsdl" MetadataType="Wsdl" ID="38feaa70-e804-4124-9762-e2cb1a38b2b3" SourceId="1" SourceUrl="http://localhost:56481/ServiceApp.svc?wsdl" />
+    <MetadataFile FileName="ServiceApp1.xsd" MetadataType="Schema" ID="311e0ea2-9610-430c-9de5-e3e2a1959e73" SourceId="1" SourceUrl="http://localhost:56481/ServiceApp.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceApp2.xsd" MetadataType="Schema" ID="a1bc98c5-10ea-442c-a151-9562fc594ac5" SourceId="1" SourceUrl="http://localhost:56481/ServiceApp.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServiceApp3.xsd" MetadataType="Schema" ID="1ed14738-bf44-4a8e-b389-50646f66d707" SourceId="1" SourceUrl="http://localhost:56481/ServiceApp.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
