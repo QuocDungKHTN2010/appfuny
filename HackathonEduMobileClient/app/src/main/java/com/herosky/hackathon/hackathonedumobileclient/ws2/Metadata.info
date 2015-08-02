@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<EasyWSDL>
+  <Info>
+    <Version>4.1.7.1</Version>
+    <AccountType>Basic</AccountType>
+    <LibrariesFolder>libs/easywsdl</LibrariesFolder>
+  </Info>
+  <Settings>
+    <Url>http://10.0.240.221:56481/ServiceApp.svc?wsdl</Url>
+    <ClassPrefix/>
+    <PackageName>com.herosky.hackathon.hackathonedumobileclient.ws2</PackageName>
+    <AddDocumentation>false</AddDocumentation>
+    <EnableAdvancedFeatures>false</EnableAdvancedFeatures>
+    <EnableMTOM>false</EnableMTOM>
+    <EncodeIllegalCharacters>true</EncodeIllegalCharacters>
+    <GenerateAsyncOperations>false</GenerateAsyncOperations>
+    <ImplementSerializable>false</ImplementSerializable>
+    <InitializeCollections>true</InitializeCollections>
+    <UseJodaTime>false</UseJodaTime>
+  </Settings>
+  <Files>
+    <File>QMPArrayOfClass.java</File>
+    <File>QMPArrayOfHistory.java</File>
+    <File>QMPArrayOfstring.java</File>
+    <File>QMPArrayOfTeacher.java</File>
+    <File>QMPArrayOfTeacher_Student_Mapping.java</File>
+    <File>QMPBasicHttpBinding_IServiceApp.java</File>
+    <File>QMPClass.java</File>
+    <File>QMPExtendedSoapSerializationEnvelope.java</File>
+    <File>QMPHelper.java</File>
+    <File>QMPHistory.java</File>
+    <File>QMPMarshalGuid.java</File>
+    <File>QMPMessageContent.java</File>
+    <File>QMPParent.java</File>
+    <File>QMPStudent.java</File>
+    <File>QMPTeacher.java</File>
+    <File>QMPTeacher_Student_Mapping.java</File>
+    <File>QMPTypeMessage.java</File>
+  </Files>
+  <Libraries>
+    <File>ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar</File>
+  </Libraries>
+</EasyWSDL>

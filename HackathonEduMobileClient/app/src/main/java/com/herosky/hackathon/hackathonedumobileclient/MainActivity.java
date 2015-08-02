@@ -32,6 +32,9 @@ import com.herosky.hackathon.hackathonedumobileclient.ws.PBGArrayOfstring;
 import com.herosky.hackathon.hackathonedumobileclient.ws.PBGTeacher;
 import com.herosky.hackathon.hackathonedumobileclient.ws.PBGTeacher_Student_Mapping;
 import com.herosky.hackathon.hackathonedumobileclient.ws.ServiceClient;
+import com.herosky.hackathon.hackathonedumobileclient.ws2.QMPArrayOfHistory;
+import com.herosky.hackathon.hackathonedumobileclient.ws2.QMPHistory;
+import com.herosky.hackathon.hackathonedumobileclient.ws2.ServiceClient2;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -58,7 +61,7 @@ public class MainActivity extends Activity{
     LinearLayout loginForm, sendMessageForm,historyForm;
     TableRow rowAdd;
     EditText title, message, time,user,pass;
-    TextView people;
+    TextView people, filterPeople;
     Button addPeople,sendMessage,login;
 
     @Override
@@ -117,31 +120,59 @@ public class MainActivity extends Activity{
 
     }
     Boolean isSendMessage = false;
-    public class loadHistoryTask extends  AsyncTask<Void, Void, Boolean>
+    public class loadHistoryTask extends  AsyncTask<Void, Void, QMPArrayOfHistory>
     {
         @Override
         protected void onPreExecute() {
+            dialog = new ProgressDialog(MainActivity.this,ProgressDialog.THEME_HOLO_LIGHT);
+            dialog.setTitle("History");
+            dialog.setMessage("Loading...");
+            dialog.setCancelable(false);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
             super.onPreExecute();
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            return null;
+        protected QMPArrayOfHistory doInBackground(Void... params) {
+            try {
+                return new ServiceClient2().getHistoryByTeacherId(currentUser.TeacherId);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
         }
 
         @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
+        protected void onPostExecute(QMPArrayOfHistory res) {
+            if(res == null)
+            {
+                Toast.makeText(MainActivity.this,"Connection problem...",Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this,"Successful...",Toast.LENGTH_LONG).show();
+                histories.clear();
+                histories.add(new QMPHistory());
+                histories.addAll(res);
+                adapterHistory.notifyDataSetChanged();
+            }
+            dialog.dismiss();
+            super.onPostExecute(res);
         }
     }
+    ArrayList<QMPHistory> histories = new ArrayList<>();
     public void goToHistoryForm()
     {
+
         isSendMessage = false;
         currentForm.startAnimation(out);
         currentForm.setVisibility(View.GONE);
         historyForm.setVisibility(View.VISIBLE);
         historyForm.startAnimation(in);
         currentForm = historyForm;
+        new loadHistoryTask().execute();
     }
     public void goToLoginForm()
     {
@@ -170,7 +201,7 @@ public class MainActivity extends Activity{
         title = (EditText) findViewById(R.id.editTextEventTitle);
         message = (EditText) findViewById(R.id.editTextMessage);
         time = (EditText) findViewById(R.id.editTextTime);
-        people = (TextView) findViewById(R.id.textView);
+        people = (TextView) findViewById(R.id.textViewPeople);
         addPeople = (Button) findViewById(R.id.imageButtonAdd);
         sendMessage = (Button) findViewById(R.id.buttonSendMessage);
         rowAdd = (TableRow) findViewById(R.id.rowAdd);
@@ -399,9 +430,13 @@ public class MainActivity extends Activity{
     boolean checkAll = false;
 
 
+    HistoryAdapter adapterHistory;
 
     public void setUpHistoryForm()
     {
+        adapterHistory = new HistoryAdapter(MainActivity.this,histories);
+        listViewHistory.setAdapter(adapterHistory);
+
         rowFilter.setClickable(true);
         rowFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -413,6 +448,7 @@ public class MainActivity extends Activity{
                 dialog.setTitle("FILTER STUDENT");
                 GridView gridView = (GridView) dialog.findViewById(R.id.gridView);
                 final AdapterGridView adapter = new AdapterGridView(MainActivity.this, listInfos);
+
                 gridView.setAdapter(adapter);
                 Button done = (Button) dialog.findViewById(R.id.buttonDone);
                 final Button selectAll = (Button) dialog.findViewById(R.id.buttonSelect);
@@ -456,7 +492,7 @@ public class MainActivity extends Activity{
                             } else
                                 isSendAll = false;
                         }
-                        people.setText(preview);
+                        filterPeople.setText(preview);
                         dialog.dismiss();
                     }
                 });
@@ -484,6 +520,7 @@ public class MainActivity extends Activity{
         deleteHistory = (Button)findViewById(R.id.buttonDel);
         listViewHistory = (ListView)findViewById(R.id.listViewHistory);
         rowFilter = (TableRow) findViewById(R.id.rowFilter);
+        filterPeople = (TextView)findViewById(R.id.textViewFilter);
     }
     public void setUpSendMessageForm()
     {
@@ -495,6 +532,8 @@ public class MainActivity extends Activity{
                 if(isChecked)
                 {
                     type ="Exam";
+                    title.setText(type);
+                    message.setText("Kiểm tra: ");
                     meeting.setChecked(false);
                     comment.setChecked(false);
                     fee.setChecked(false);
@@ -507,6 +546,8 @@ public class MainActivity extends Activity{
                 if(isChecked)
                 {
                     type ="Fee";
+                    title.setText(type);
+                    message.setText("Học phí: ");
                     meeting.setChecked(false);
                     comment.setChecked(false);
                     exam.setChecked(false);
@@ -519,6 +560,8 @@ public class MainActivity extends Activity{
                 if(isChecked)
                 {
                     type ="Comment";
+                    title.setText(type);
+                    message.setText("Đánh giá: ");
                     meeting.setChecked(false);
                     fee.setChecked(false);
                     exam.setChecked(false);
@@ -531,6 +574,8 @@ public class MainActivity extends Activity{
                 if(isChecked)
                 {
                     type ="Meeting";
+                    title.setText(type);
+                    meeting.setText("Cuộc họp :");
                     exam.setChecked(false);
                     comment.setChecked(false);
                     fee.setChecked(false);
