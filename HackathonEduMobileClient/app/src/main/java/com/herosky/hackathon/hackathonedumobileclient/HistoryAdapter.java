@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class HistoryAdapter extends BaseAdapter {
 
     Context mContext;
+
     ArrayList<QMPHistory> histories = new ArrayList<QMPHistory>();
 
     public HistoryAdapter(Context context, ArrayList<QMPHistory> lists) {
@@ -71,6 +72,7 @@ public class HistoryAdapter extends BaseAdapter {
             holder = (HistoryHolder) convertView.getTag();
             holder.pos = position;
         }
+        histories.get(position).cb = holder.checkBox;
         if(position == 0)
         {
             holder.root.setBackgroundColor(Color.parseColor("#F1EFE2"));
@@ -84,7 +86,7 @@ public class HistoryAdapter extends BaseAdapter {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     for(int i = 0 ; i < histories.size();i++)
                     {
-                        
+                        histories.get(i).cb.setChecked(isChecked);
                     }
                 }
             });
@@ -93,7 +95,7 @@ public class HistoryAdapter extends BaseAdapter {
 
             holder.root.setBackgroundColor(Color.parseColor("#FFFFFF"));
             holder.checkBox.setChecked(histories.get(position).isCheck);
-            holder.checkBox.setCompoundDrawablesRelative(mContext.getResources().getDrawable(R.drawable.user),null,null,null);
+            holder.checkBox.setCompoundDrawablesRelative(mContext.getResources().getDrawable(R.drawable.user), null, null, null);
             //holder.checkBox.setText(persons.get(position).student.FullName);
             holder.checkBox.setTag(position);
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

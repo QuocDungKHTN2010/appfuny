@@ -57,7 +57,7 @@ public class MainActivity extends Activity{
     }
     RadioButton meeting, exam, comment, fee;
     String type="";
-    RadioGroup group1,group2;
+    TableRow group1,group2;
     LinearLayout loginForm, sendMessageForm,historyForm;
     TableRow rowAdd;
     EditText title, message, time,user,pass;
@@ -101,15 +101,16 @@ public class MainActivity extends Activity{
     public void goToMessageForm(boolean isSendMessage)
     {
         exam.setChecked(true);
-        group2.clearCheck();
-        group1.clearCheck();
+
         if(isSendMessage)
         {
+            sendMessage.setText("SEND MESSAGE");
             group2.setVisibility(View.VISIBLE);
         }
-        else
+        else {
+            sendMessage.setText("ADD SCHEDULE");
             group2.setVisibility(View.GONE);
-
+        }
         currentForm.startAnimation(out);
         currentForm.setVisibility(View.GONE);
         sendMessageForm.setVisibility(View.VISIBLE);
@@ -195,8 +196,8 @@ public class MainActivity extends Activity{
     public void initIDSendMessageForm()
     {
 
-        group1 = (RadioGroup)findViewById(R.id.group1);
-        group2 = (RadioGroup)findViewById(R.id.group2);
+        group1 = (TableRow)findViewById(R.id.group1);
+        group2 = (TableRow)findViewById(R.id.group2);
         sendMessageForm = (LinearLayout)findViewById(R.id.sendMessageForm);
         title = (EditText) findViewById(R.id.editTextEventTitle);
         message = (EditText) findViewById(R.id.editTextMessage);
@@ -533,7 +534,7 @@ public class MainActivity extends Activity{
                 {
                     type ="Exam";
                     title.setText(type);
-                    message.setText("Kiểm tra: ");
+                    message.setText("Examination: ");
                     meeting.setChecked(false);
                     comment.setChecked(false);
                     fee.setChecked(false);
@@ -547,7 +548,7 @@ public class MainActivity extends Activity{
                 {
                     type ="Fee";
                     title.setText(type);
-                    message.setText("Học phí: ");
+                    message.setText("Fee: ");
                     meeting.setChecked(false);
                     comment.setChecked(false);
                     exam.setChecked(false);
@@ -561,7 +562,7 @@ public class MainActivity extends Activity{
                 {
                     type ="Comment";
                     title.setText(type);
-                    message.setText("Đánh giá: ");
+                    message.setText("Comment : ");
                     meeting.setChecked(false);
                     fee.setChecked(false);
                     exam.setChecked(false);
@@ -575,7 +576,8 @@ public class MainActivity extends Activity{
                 {
                     type ="Meeting";
                     title.setText(type);
-                    meeting.setText("Cuộc họp :");
+                    message.setText("Meeting :");
+
                     exam.setChecked(false);
                     comment.setChecked(false);
                     fee.setChecked(false);
@@ -728,10 +730,10 @@ public class MainActivity extends Activity{
         setUp();
         in = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_right);
         out = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_left);
-        loginForm.setVisibility(View.GONE);
+        loginForm.setVisibility(View.VISIBLE);
         historyForm.setVisibility(View.GONE);
-        sendMessageForm.setVisibility(View.VISIBLE);
-        currentForm = sendMessageForm;
+        sendMessageForm.setVisibility(View.GONE);
+        currentForm = loginForm;
         super.onCreate(savedInstanceState);
     }
 }

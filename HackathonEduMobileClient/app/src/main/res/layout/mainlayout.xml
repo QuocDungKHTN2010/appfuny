@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/education2"
+    android:background="@drawable/back2"
     android:paddingTop="10dp"
     android:gravity="center"
     android:orientation="vertical">
@@ -104,7 +104,7 @@
                 android:padding="15dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="ADD"
+                android:text="ADD SCHEDULE"
                 android:layout_marginRight="5dp"
                 android:textStyle="bold" />
             <Button
@@ -183,9 +183,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
-                        <RadioGroup
+                        <TableRow
                             android:id="@+id/group1"
-                            android:orientation="horizontal" android:layout_width="match_parent"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <RadioButton
                                 android:layout_width="0dp"
@@ -204,8 +204,8 @@
                                 android:text="Exam"
                                 android:id="@+id/radioButtonExam"
                                 android:layout_weight="1" />
-                        </RadioGroup>
-                        <RadioGroup android:orientation="horizontal" android:layout_width="match_parent"
+                        </TableRow>
+                        <TableRow android:layout_width="match_parent"
                             android:id="@+id/group2"
                             android:layout_height="wrap_content">
                             <RadioButton
@@ -221,10 +221,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/fee"
-                                android:text="Bad"
+                                android:text="Fee"
                                 android:id="@+id/radioButtonFee"
                                 android:layout_weight="1" />
-                        </RadioGroup>
+                        </TableRow>
 
 
 
@@ -327,7 +327,7 @@
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="2"
-            android:text="Improve connect between family and school.safsdfsdfsdafdsf sdfsfsdsaf sfdsdf."
+            android:text="Improve connecting between family and school."
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:visibility="visible" />

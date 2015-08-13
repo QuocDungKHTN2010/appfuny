@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HackathonEduMobileClient</string>
+    <string name="app_name">EDU CONNECT</string>
     <color name="bg_normal">#3498db</color>
     <color name="bg_pressed">#2980b9</color>
 </resources>

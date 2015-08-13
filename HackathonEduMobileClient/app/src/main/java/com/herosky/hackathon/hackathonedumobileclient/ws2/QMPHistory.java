@@ -10,11 +10,14 @@ package com.herosky.hackathon.hackathonedumobileclient.ws2;
 //---------------------------------------------------
 
 
+import android.widget.CheckBox;
+
 import java.util.Hashtable;
 import org.ksoap2.serialization.*;
 
 public class QMPHistory extends AttributeContainer implements KvmSerializable
 {
+    public CheckBox cb;
     public boolean isCheck = false;
     public Integer Id;
     
